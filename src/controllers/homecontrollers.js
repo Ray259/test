@@ -1,13 +1,16 @@
-let getHomePage = (req, res) => {
-    // return res.send("Controller!");
-    return res.render('homepage.ejs'); 
-    //khong can goi duong dan vi trong file config da set views path
-} //truyen request va respond cho express
+import db from '../models/index'
+let getHomePage = async (req, res) => {
+    try {
+        let data = await db.User.findAll();
+        return res.render('homepage.ejs', {
+            data: JSON.stringify(data)
+        });
+        return res.render('homepage.ejs');
+    } catch (e) {
+        console.log(e);
+    }
+}
 
-// object: {
-//     key: ''
-//     value: ''
-// }
 
 let getAbout = (req, res) => {
     return res.render('test/about.ejs');
